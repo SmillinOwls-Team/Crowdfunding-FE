@@ -1,0 +1,19 @@
+.single-column-layout__app-footer {
+    height: var(--footer-height);
+    padding: 0 var(--page-padding);
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    font-size: 0.9rem;
+
+    user-select: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+
+    > span {
+        text-align: center;
+    }
+}

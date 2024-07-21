@@ -1,0 +1,34 @@
+.project-schedule-container {
+    :nth-child(n) {
+        .project-schedule-item {
+            border-radius: 0;
+            border-top: none;
+        }
+    }
+
+    :last-child {
+        .project-schedule-item {
+            border-radius: 0 0 8px 8px;
+        }
+    }
+
+    .project-schedule-item-head {
+        background-color: #f7f9fd;
+        border-radius: 8px 8px 0 0;
+
+        font-size: 1.2rem;
+        font-weight: 600;
+    }
+
+    .project-schedule-item {
+        .project-schedule-item-title {
+            font-size: 1rem;
+            color: #838fa2;
+        }
+
+        .project-schedule-item-value {
+            font-size: 1rem;
+            font-weight: 600;
+        }
+    }
+}

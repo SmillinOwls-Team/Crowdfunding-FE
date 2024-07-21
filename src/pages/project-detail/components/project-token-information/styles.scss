@@ -1,0 +1,34 @@
+.token-infor-container {
+    :nth-child(n) {
+        .token-infor-item {
+            border-radius: 0;
+            border-top: none;
+        }
+    }
+
+    :last-child {
+        .token-infor-item {
+            border-radius: 0 0 8px 8px;
+        }
+    }
+
+    .token-infor-item-head {
+        background-color: #f7f9fd;
+        border-radius: 8px 8px 0 0;
+
+        font-size: 1.2rem;
+        font-weight: 600;
+    }
+
+    .token-infor-item {
+        .token-infor-item-title {
+            font-size: 1rem;
+            color: #838fa2;
+        }
+
+        .token-infor-item-value {
+            font-size: 1rem;
+            font-weight: 600;
+        }
+    }
+}

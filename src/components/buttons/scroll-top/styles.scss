@@ -1,0 +1,50 @@
+.scroll-top-wrapper {
+    position: fixed;
+    right: 30px;
+
+    animation-timing-function: cubic-bezier(0.33, 1, 0.68, 1);
+    animation-name: toBottom;
+    animation-duration: 0.4s;
+    bottom: -76px;
+
+    .scroll-top-btn.ant-btn.ant-btn-circle {
+        width: 56px;
+        height: 56px;
+        border-width: 1px;
+        border-style: solid;
+        color: #faad93;
+        border-color: #faad93;
+        background-color: #faad9324;
+    }
+}
+
+.scroll-top-wrapper.active {
+    animation-timing-function: cubic-bezier(0.33, 1, 0.68, 1);
+    animation-name: toTop;
+    animation-duration: 0.4s;
+    bottom: 20px;
+}
+
+@keyframes toTop {
+    0% {
+        opacity: 0;
+        bottom: -76px;
+    }
+
+    100% {
+        opacity: 1;
+        bottom: 20px;
+    }
+}
+
+@keyframes toBottom {
+    0% {
+        opacity: 1;
+        bottom: 20px;
+    }
+
+    100% {
+        opacity: 0;
+        bottom: -76px;
+    }
+}

@@ -1,0 +1,15 @@
+.statistic-card {
+    height: 100%;
+    border: 1px solid #e1e3ea;
+
+    > div {
+        height: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+}
+
+.ant-card.statistic-card > .ant-card-body {
+    padding: 16px;
+}

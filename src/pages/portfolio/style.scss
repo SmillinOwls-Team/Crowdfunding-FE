@@ -1,0 +1,22 @@
+.project-table {
+    .project-table-row-text-mute {
+        color: #94a3b8;
+    }
+    .project-table-row-text {
+        font-size: 1rem;
+        font-weight: 500;
+    }
+
+    .project-table-row-status {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        padding: 0.25rem 1rem;
+        border-radius: 8px;
+
+        .project-table-row-status-text {
+            text-transform: uppercase;
+            font-weight: 500;
+        }
+    }
+}

@@ -1,0 +1,44 @@
+.single-column-layout__app-header {
+    height: var(--header-height);
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.5rem;
+
+    padding: 0 var(--page-padding);
+    background-color: var(--header-bg-color);
+
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1;
+    border-bottom: solid 1px #e4e7ec;
+
+    .single-column-layout__app-header__right {
+        height: 100%;
+
+        .single-column-layout__app-header__navigation {
+            height: 100%;
+
+            .nav-btn {
+                .ant-btn.ant-btn-text {
+                    &:hover {
+                        background-color: #fff6f0;
+                    }
+                }
+            }
+
+            .nav-btn.active {
+                .ant-btn.ant-btn-text {
+                    background-color: #fff6f0;
+                }
+            }
+        }
+    }
+}
+
+.custom-connect-wallet.tw-connect-wallet {
+    background-color: #ed8366;
+}
