@@ -1,9 +1,10 @@
-import { Alert, Button, Col, DatePicker, Form, Input, InputNumber, Row, Space } from "antd";
+import { Button, Col, DatePicker, Form, Input, InputNumber, Row, Space } from "antd";
 import moment from "moment";
 import * as React from "react";
 import { DATETIME_FORMAT } from "../../../../constants/datetime";
 import { createSlugFromVietnameseName } from "../../../../utils/common-utils";
 import { isImageUrlValid } from "../../../../utils/image-checker";
+import "./index.scss";
 
 const { TextArea } = Input;
 const { RangePicker } = DatePicker;
@@ -81,6 +82,7 @@ export default function CreateProjectForm(props: ICreateProjectFormProps) {
                 <Row gutter={{ lg: 16 }}>
                     <Col xs={24} lg={12}>
                         <Form.Item
+                            className="form-item"
                             name="name"
                             label="Project Title"
                             rules={[
@@ -102,6 +104,7 @@ export default function CreateProjectForm(props: ICreateProjectFormProps) {
 
                     <Col xs={24} lg={12}>
                         <Form.Item
+                            className="form-item"
                             name="slug"
                             label="Project Slug"
                             rules={[
@@ -117,31 +120,10 @@ export default function CreateProjectForm(props: ICreateProjectFormProps) {
                     </Col>
                 </Row>
 
-                <Form.Item
-                    name="shortDescription"
-                    label="Short Description"
-                    rules={[{ required: true, whitespace: true, type: "string", max: 100 }]}
-                    tooltip={"Short description of your project. It will be displayed on card"}
-                >
-                    <Input placeholder="Write your short description" size="large" showCount maxLength={100} />
-                </Form.Item>
-
-                <Form.Item
-                    name="description"
-                    label="Description"
-                    rules={[{ required: true, whitespace: true, type: "string" }]}
-                >
-                    <TextArea
-                        placeholder="Write your description"
-                        size="large"
-                        autoSize={{ minRows: 5, maxRows: 15 }}
-                        showCount
-                    />
-                </Form.Item>
-
                 <Row gutter={{ lg: 16 }}>
                     <Col xs={24} lg={12}>
                         <Form.Item
+                            className="form-item"
                             name="logoUrl"
                             label="Logo URL"
                             tooltip={"An image that represented for your project"}
@@ -168,6 +150,7 @@ export default function CreateProjectForm(props: ICreateProjectFormProps) {
 
                     <Col xs={24} lg={12}>
                         <Form.Item
+                            className="form-item"
                             name="coverBackgroundUrl"
                             label="Cover Image URL"
                             tooltip={
@@ -191,6 +174,118 @@ export default function CreateProjectForm(props: ICreateProjectFormProps) {
                             ]}
                         >
                             <Input placeholder="Put your cover image url" size="large" />
+                        </Form.Item>
+                    </Col>
+                </Row>
+
+                <Form.Item
+                    className="form-item"
+                    name="shortDescription"
+                    label="Short Description"
+                    rules={[{ required: true, whitespace: true, type: "string", max: 100 }]}
+                    tooltip={"Short description of your project. It will be displayed on card"}
+                >
+                    <Input placeholder="Write your short description" size="large" showCount maxLength={100} />
+                </Form.Item>
+
+                <Form.Item
+                    className="form-item"
+                    name="description"
+                    label="Full Description"
+                    rules={[{ required: true, whitespace: true, type: "string" }]}
+                >
+                    <TextArea
+                        placeholder="Write your full description"
+                        size="large"
+                        autoSize={{ minRows: 5, maxRows: 15 }}
+                        showCount
+                    />
+                </Form.Item>
+
+                <Row gutter={{ lg: 16 }}>
+                    <Col xs={24} lg={12}>
+                        <Row gutter={{ lg: 16 }}>
+                            <Col xs={12}>
+                                <Form.Item 
+                                    name="tokenSymbol"
+                                    label="Token Symbol"
+                                    rules={[
+                                        { required: true, type: "string" },
+                                        {
+                                            pattern: new RegExp(/[A-Z]/),
+                                            message: "Token symbol must include only uppercase letters",
+                                        },
+                                    ]}
+                                >
+                                    <Input placeholder="ETH" size="large" />
+                                </Form.Item>
+                            </Col>
+
+                            <Col xs={12}>
+                                <Form.Item
+                                    name="tokenSwapRaito"
+                                    label="Token Swap Raito"
+                                    rules={[
+                                        () => ({
+                                            validator(_, value) {
+                                                if (!value || value <= 0) {
+                                                    return Promise.reject(
+                                                        new Error("Token swap raito must be larger than 0")
+                                                    );
+                                                }
+
+                                                return Promise.resolve();
+                                            },
+                                        }),
+                                    ]}
+                                    tooltip={"The proportion of your token compared to 1 ETH"}
+                                >
+                                    <InputNumber size="large" placeholder="0.05" min={0} />
+                                </Form.Item>
+                            </Col>
+                        </Row>
+                    </Col>
+
+                    <Col xs={24} lg={12}>
+                        <Form.Item
+                            className="form-item"
+                            name="fundingPeriod"
+                            label="Funding Period"
+                            rules={[
+                                () => {
+                                    return {
+                                        validator(_, value) {
+                                            if (!value) {
+                                                return Promise.reject(new Error("Please enter Funding Period"));
+                                            }
+
+                                            // const endDate = value[1];
+                                            // const tokenClaimingPeriod = getFieldValue("tokenClaimingPeriod");
+
+                                            // if (tokenClaimingPeriod && tokenClaimingPeriod[0].isBefore(endDate)) {
+                                            //     return Promise.reject(
+                                            //         new Error(
+                                            //             "Funding end date must be before token claiming start date"
+                                            //         )
+                                            //     );
+                                            // }
+
+                                            return Promise.resolve();
+                                        },
+                                    };
+                                },
+                            ]}
+                            tooltip={"Investors can stake money between this time. Start date also means 'Launch date'"}
+                        >
+                            <RangePicker
+                                showTime
+                                format={DATETIME_FORMAT.rangePickerFormat}
+                                size="large"
+                                allowClear
+                                disabledDate={(current) => {
+                                    return current && current < moment();
+                                }}
+                            />
                         </Form.Item>
                     </Col>
                 </Row>
@@ -253,93 +348,6 @@ export default function CreateProjectForm(props: ICreateProjectFormProps) {
                 </Row>
 
                 <Row gutter={{ lg: 16 }}>
-                    <Col xs={24} lg={12}>
-                        <Row gutter={{ lg: 16 }}>
-                            <Col xs={12}>
-                                <Form.Item
-                                    name="tokenSymbol"
-                                    label="Token Symbol"
-                                    rules={[
-                                        { required: true, type: "string" },
-                                        {
-                                            pattern: new RegExp(/[A-Z]/),
-                                            message: "Token symbol must include only uppercase letters",
-                                        },
-                                    ]}
-                                >
-                                    <Input placeholder="ETH" size="large" />
-                                </Form.Item>
-                            </Col>
-
-                            <Col xs={12}>
-                                <Form.Item
-                                    name="tokenSwapRaito"
-                                    label="Token Swap Raito"
-                                    rules={[
-                                        () => ({
-                                            validator(_, value) {
-                                                if (!value || value <= 0) {
-                                                    return Promise.reject(
-                                                        new Error("Token swap raito must be larger than 0")
-                                                    );
-                                                }
-
-                                                return Promise.resolve();
-                                            },
-                                        }),
-                                    ]}
-                                    tooltip={"The proportion of your token compared to 1 ETH"}
-                                >
-                                    <InputNumber size="large" placeholder="0.05" min={0} />
-                                </Form.Item>
-                            </Col>
-                        </Row>
-                    </Col>
-
-                    <Col xs={24} lg={12}>
-                        <Form.Item
-                            name="fundingPeriod"
-                            label="Funding Period"
-                            rules={[
-                                () => {
-                                    return {
-                                        validator(_, value) {
-                                            if (!value) {
-                                                return Promise.reject(new Error("Please enter Funding Period"));
-                                            }
-
-                                            // const endDate = value[1];
-                                            // const tokenClaimingPeriod = getFieldValue("tokenClaimingPeriod");
-
-                                            // if (tokenClaimingPeriod && tokenClaimingPeriod[0].isBefore(endDate)) {
-                                            //     return Promise.reject(
-                                            //         new Error(
-                                            //             "Funding end date must be before token claiming start date"
-                                            //         )
-                                            //     );
-                                            // }
-
-                                            return Promise.resolve();
-                                        },
-                                    };
-                                },
-                            ]}
-                            tooltip={"Investors can stake money between this time. Start date also means 'Launch date'"}
-                        >
-                            <RangePicker
-                                showTime
-                                format={DATETIME_FORMAT.rangePickerFormat}
-                                size="large"
-                                allowClear
-                                disabledDate={(current) => {
-                                    return current && current < moment();
-                                }}
-                            />
-                        </Form.Item>
-                    </Col>
-                </Row>
-
-                <Row gutter={{ lg: 16 }}>
                     {/* <Col xs={24} lg={12}>
                         <Form.Item
                             name="tokenClaimingPeriod"
@@ -385,29 +393,13 @@ export default function CreateProjectForm(props: ICreateProjectFormProps) {
                     </Col> */}
                 </Row>
 
-                <Alert
-                    message="Before you submit"
-                    description={
-                        <>
-                            <p> - After submiting, you cannot edit or delete your project on this site.</p>
-                            <p>
-                                - When the funding period ends, if your project are not staked at <strong>90%</strong>,
-                                all money will be sent back to investors!
-                            </p>
-                        </>
-                    }
-                    type="warning"
-                    showIcon
-                    style={{ marginBottom: "24px" }}
-                />
-
                 <Space
                     align="center"
                     direction="horizontal"
                     size="middle"
                     style={{ width: "100%", justifyContent: "center" }}
                 >
-                    <Button type="text" htmlType="button" size="large" onClick={() => onCancel && onCancel()}>
+                    <Button type="dashed" htmlType="button" size="large" onClick={() => onCancel && onCancel()}>
                         Cancel
                     </Button>
 

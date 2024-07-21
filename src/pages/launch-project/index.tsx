@@ -22,7 +22,7 @@ export default function LaunchProject() {
     const antMessage = useAntMessage();
 
     const handleFormCancel = () => {
-        navigate("/explore");
+        navigate("/projects");
     };
 
     const handleFormSubmit = async (formData: IProjectFormData) => {
@@ -44,7 +44,7 @@ export default function LaunchProject() {
         };
 
         try {
-            blockUI("Transaction is in progess, please wait ...");
+            blockUI("Project is in progess of creating, please wait ...");
             await createProject({ args: [payload] });
             unblockUI();
 
@@ -55,7 +55,7 @@ export default function LaunchProject() {
         } catch (error: any) {
             unblockUI();
             console.log(error.reason || error.message);
-            antMessage.error("Transaction failed, please try again later!");
+            antMessage.error("Project creating failed, please try again later!");
         }
     };
 
@@ -89,10 +89,7 @@ export default function LaunchProject() {
                 <Card className="launch-project-container">
                     <Space align="center" direction="vertical" size="middle">
                         <Typography className="launch-project-title">
-                            <Typography.Title level={2}>Launch a Project</Typography.Title>
-                            <Typography.Text type="danger">
-                                <span>*</span> All fields are required!
-                            </Typography.Text>
+                            <Typography.Title level={2}>Start Up A Project</Typography.Title>
                         </Typography>
 
                         <CreateProjectForm onSubmit={handleFormSubmit} onCancel={handleFormCancel} />

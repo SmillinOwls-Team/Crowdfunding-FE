@@ -26,7 +26,7 @@ export default function StatisticCard(props: IStatisticCardProps) {
     };
 
     return (
-        <Card className="statistic-card" bordered>
+        <Card className="statistic-card" style={{ borderStyle: "dashed", borderWidth: "2px" }} bordered>
             <Space size="small" style={{ width: "100%", display: "flex", justifyContent: "space-between", alignItems: "center" }}>
                 {iconComponent}
 
