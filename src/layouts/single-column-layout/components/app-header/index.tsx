@@ -35,35 +35,42 @@ export default function AppHeader() {
                 </Link>
             )}
 
-            <div className="single-column-layout__app-header__right">
-                <Space style={{ height: "100%" }} split={<Divider type="vertical" />}>
-                    {!isSmallScreen && (
-                        <nav className="single-column-layout__app-header__navigation">
-                            <Space style={{ height: "100%" }}>
-                                {navigation.map((nav, index) =>
-                                    nav.path === "/" ? null : (
-                                        <NavLink key={index} to={nav.path} className="nav-btn" end>
-                                            <Button
-                                                type="text"
-                                                size="large"
-                                                style={{
-                                                    color: token.colorPrimary,
-                                                    textTransform: "uppercase",
-                                                    fontWeight: "600",
-                                                }}
-                                            >
-                                                {nav.label}
-                                            </Button>
-                                        </NavLink>
-                                    )
-                                )}
-                            </Space>
-                        </nav>
-                    )}
+            <Space style={{ height: "100%" }} split={<Divider type="vertical" />}>
+                {!isSmallScreen && (
+                    <nav className="single-column-layout__app-header__navigation">
+                        <div style={{ height: "100%" }}>
+                            {navigation.map((nav, index) =>
+                                nav.path === "/" ? null : (
+                                    <NavLink key={index} to={nav.path} className="nav-btn" end>
+                                        <Button
+                                            type="text"
+                                            size="large"
+                                            style={{
+                                                color: token.colorLink,
+                                                textTransform: "uppercase",
+                                                fontWeight: "600",
+                                            }}
+                                        >
+                                            {nav.label}
+                                        </Button>
+                                    </NavLink>
+                                )
+                            )}
+                        </div>
+                    </nav>
+                )}
 
-                    <ConnectWallet theme="light" btnTitle="Connect Wallet" className="custom-connect-wallet" />
-                </Space>
-            </div>
+                <ConnectWallet
+                    theme="light"
+                    modalTitle="Choose your wallet"
+                    auth={{
+                        onLogin: (token) => console.log("Logged in with token: ", token),
+                        onLogout: () => console.log("Logged out"),
+                    }}
+                    btnTitle="Connect Wallet"
+                    className="custom-connect-wallet"
+                />
+            </Space>
         </header>
     );
 }
