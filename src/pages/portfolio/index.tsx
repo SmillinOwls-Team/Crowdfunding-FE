@@ -101,6 +101,25 @@ export default function PortfolioPage(_props: IPortfolioPageProps) {
             },
         },
         {
+            title: "Ends at",
+            dataIndex: "endsAt",
+            key: "endsAt",
+            align: "right",
+            render: (_, record) => {
+                const dateString = moment(record.endsAt).format("MMMM DD, YYYY");
+                const timeString = moment(record.endsAt).format("h:mm:ss A, Z");
+
+                return (
+                    <Space direction="vertical" align="end" className="project-table-row-name" size={0}>
+                        <Typography.Text className="project-table-row-text">{dateString}</Typography.Text>
+                        <Typography.Text className="project-table-row-text project-table-row-text-mute">
+                            {timeString}
+                        </Typography.Text>
+                    </Space>
+                );
+            },
+        },
+        {
             title: "Status",
             dataIndex: "status",
             key: "status",
@@ -122,25 +141,6 @@ export default function PortfolioPage(_props: IPortfolioPageProps) {
                             {bannerVariant}
                         </Typography.Text>
                     </div>
-                );
-            },
-        },
-        {
-            title: "Ends at",
-            dataIndex: "endsAt",
-            key: "endsAt",
-            align: "right",
-            render: (_, record) => {
-                const dateString = moment(record.endsAt).format("MMMM Do YYYY");
-                const timeString = moment(record.endsAt).format("h:mm:ss AZ");
-
-                return (
-                    <Space direction="vertical" align="end" className="project-table-row-name" size={0}>
-                        <Typography.Text className="project-table-row-text">{dateString}</Typography.Text>
-                        <Typography.Text className="project-table-row-text project-table-row-text-mute">
-                            {timeString}
-                        </Typography.Text>
-                    </Space>
                 );
             },
         },
