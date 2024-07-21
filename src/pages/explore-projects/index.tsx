@@ -5,7 +5,7 @@ import moment from "moment";
 import { ElementRef, useEffect, useRef, useState } from "react";
 import { useSmartContract } from "../../contexts/smart-contract";
 import ProjectCard, { IProjectCardData } from "./components/project-card";
-import StatisticBar, { IStatisticData } from "./components/statistic-bar";
+import StatisticBar, { IStatisticData } from "./components/statistic-block/statistic-bar";
 import "./index.scss";
 
 export default function ExploreProjects() {
@@ -129,9 +129,18 @@ export default function ExploreProjects() {
     return (
         <Space direction="vertical" style={{ width: "100%", marginTop: "24px" }} size={32}>
             <StatisticBar data={statistics} isLoading={isStatisticLoading} />
+
             <Row ref={searchBarRef} className="explore__search-bar">
                 <Col span={24}>
-                    <div>
+                    <div style={{ display: "flex", flexDirection: "column", alignItems: "center" }}>
+                        <Typography.Title
+                            level={4}
+                            style={{
+                                color: token.colorTextBase,
+                            }}
+                        >
+                            Explore Projects
+                        </Typography.Title>
                         <Input
                             placeholder="Search by project name or token symbol"
                             size="large"
@@ -144,7 +153,7 @@ export default function ExploreProjects() {
             </Row>
 
             <Row className="explore__projects-list-container" gutter={[24, 24]}>
-                {isProjectLoading && (
+                {isProjectLoading ? (
                     <Col span={24}>
                         <Space
                             style={{
@@ -162,17 +171,17 @@ export default function ExploreProjects() {
                             </Typography.Text>
                         </Space>
                     </Col>
-                )}
-                {!isProjectLoading &&
+                ) : (
                     listToDisplay.items.map((project) => (
-                        <Col key={project.slug} xxl={8} xl={8} lg={12} md={12} xs={24}>
+                        <Col key={project.slug} lg={8} md={12} xs={24}>
                             <ProjectCard data={project} showStatus />
                         </Col>
-                    ))}
+                    ))
+                )}
             </Row>
 
             <Row className="explore__projects-list-pagination">
-                <Col span={24} style={{ display: "flex", justifyContent: "center", alignItems: "center" }}>
+                <Col span={24} style={{ display: "flex", justifyContent: "center"}}>
                     <Pagination
                         current={pagination.current}
                         pageSize={pagination.pageSize}

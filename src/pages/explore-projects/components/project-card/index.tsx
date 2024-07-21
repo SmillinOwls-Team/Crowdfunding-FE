@@ -147,7 +147,7 @@ export default function ProjectCard(props: IProjectCardProps) {
             case STATUS_BANNER_VARIANT.FUNDING_CLOSED: {
                 return {
                     label: "Ended on",
-                    value: moment(endDate).format("MMM Do YYYY"),
+                    value: moment(endDate).format("MMM DD, YYYY"),
                 };
             }
 

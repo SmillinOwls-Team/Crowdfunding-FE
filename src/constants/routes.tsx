@@ -13,9 +13,9 @@ export const routes: RouteObject[] = [
         path: "/",
         element: <AppFrame layout={<SingleColumnLayout />} />,
         children: [
-            { path: "", element: <Navigate to="/explore" /> },
-            { path: "/explore", element: <ExploreProjects /> },
-            { path: "/explore/:projectSlug", element: <ProjectDetailPage /> },
+            { path: "", element: <Navigate to="/projects" /> },
+            { path: "/projects", element: <ExploreProjects /> },
+            { path: "/projects/:projectSlug", element: <ProjectDetailPage /> },
             { path: "/portfolio", element: <PortfolioPage /> },
             { path: "/launch-ido", element: <LaunchProject /> },
             // Do not change below segment

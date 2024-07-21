@@ -13,10 +13,7 @@ interface IStatisticCardProps {
 export default function StatisticCard(props: IStatisticCardProps) {
     const { label, value, iconComponent, textColor, formatters, loading } = props;
 
-    const valueToDisplay = () => {
-        // if (value === "0") {
-        //     return "N/A";
-        // }
+    const valueToDisplay = (): string => {
 
         let strToReturn = value;
         if (!formatters) {
@@ -27,9 +24,10 @@ export default function StatisticCard(props: IStatisticCardProps) {
 
         return strToReturn;
     };
+
     return (
         <Card className="statistic-card" bordered>
-            <Space size="small" style={{ width: "100%", justifyContent: "space-between", alignItems: "center" }}>
+            <Space size="small" style={{ width: "100%", display: "flex", justifyContent: "space-between", alignItems: "center" }}>
                 {iconComponent}
 
                 <Typography>
