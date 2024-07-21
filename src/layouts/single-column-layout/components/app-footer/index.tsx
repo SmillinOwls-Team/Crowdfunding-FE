@@ -9,7 +9,7 @@ export default function AppFooter() {
     return (
         <footer
             className="single-column-layout__app-footer"
-            style={{ backgroundColor: token.colorPrimary, color: token.colorWhite }}
+            style={{ backgroundColor: token["blue-4"], color: token.colorWhite, fontWeight: "bold" }}
         >
             <span>Crowdfunding by Team 4</span>
         </footer>
