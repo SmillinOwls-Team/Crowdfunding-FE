@@ -109,7 +109,7 @@ export default function ProjectDetailPage(_props: IProjectDetailPageProps) {
                 centered: true,
                 footer: [
                     <Space key={"explore-btn"} style={{ width: "100%", justifyContent: "center" }}>
-                        <Link to="/explore">
+                        <Link to="/projects">
                             <Button type="primary">Explore more project</Button>
                         </Link>
                     </Space>,
@@ -172,7 +172,7 @@ export default function ProjectDetailPage(_props: IProjectDetailPageProps) {
                     separator=">"
                     items={[
                         {
-                            title: <Link to={"/explore"}>Projects</Link>,
+                            title: <Link to={"/projects"}>Projects</Link>,
                         },
                         {
                             title: project?.name,
